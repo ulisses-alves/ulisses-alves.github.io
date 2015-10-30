@@ -1,10 +1,10 @@
 <md-content flex layout="column" class="md-hue-1">
   <header class="md-whiteframe-2dp">
     <md-toolbar layout-padding layout="row" layout-align="center end">
-      <h1 flex="90" class="md-display-3">Ulisses Alves</h1>
+      <h1 flex="90" class="md-display-3">Header</h1>
     </md-toolbar>
     <md-content layout="row">
-      <md-button href="/" class="md-icon-button ua-icon">home</md-button>
+      <md-button href="#/" class="md-icon-button ua-icon">home</md-button>
       <md-menu-bar>
         <md-menu>
           <md-button ng-click="$mdOpenMenu()">Projects</md-button>
@@ -17,24 +17,20 @@
             </md-menu-item>
           </md-menu-content>
         </md-menu>
+        <md-menu>
+          <md-button ng-click="$mdOpenMenu()">Code</md-button>
+          <md-menu-content>
+            <md-menu-item>
+              <md-button href="#/code/ipad-highlight"
+                ng-click="$mdCloseMenu()">iPad Hightlight Hack</md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
       </md-menu-bar>
     </md-content>
   </header>
   <main flex layout-padding layout="row" layout-align="center start">
-    <div flex="90">
-      <h2 class="md-display-2">About me</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis
-        sed neque bibendum tincidunt. Fusce iaculis nec lacus sed vestibulum.
-        Maecenas volutpat purus mauris, a pretium ante dictum a. Donec quam nisl,
-        maximus sit amet sagittis sit amet, commodo sit amet arcu. Phasellus
-        pulvinar dolor vel eros venenatis, ac mattis orci porta. Fusce ligula
-        justo, semper eget ipsum ut, volutpat iaculis dolor. Cras commodo magna
-        non nulla iaculis tincidunt. Fusce id posuere mauris. Donec vel finibus
-        nulla. Cum sociis natoque penatibus et magnis dis parturient montes,
-        nascetur ridiculus mus. Maecenas at elementum justo.
-      </p>
-    </div>
+    <div flex="90" ng-view></div>
   </main>
   <md-divider></md-divider>
   <footer layout-padding layout="row" layout-align="center start">
