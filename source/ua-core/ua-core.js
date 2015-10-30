@@ -1,1 +1,5 @@
-var uaApp = angular.module('uaApp', ['ngMaterial']);
+var uaApp = angular.module('uaApp', [
+  'ngMaterial',
+  'ngRoute',
+  'ngResource'
+]);

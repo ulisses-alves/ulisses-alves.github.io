@@ -1,0 +1,8 @@
+ua-gist {
+  display: block;
+
+  > div > iframe {
+    border: none;
+    width: 100%;
+  }
+}
