@@ -5,12 +5,12 @@ module.exports = function(grunt) {
     clean: {
       preBuild: {
         expand: true,
-        cwd: 'www/',
+        cwd: 'bin/',
         src: '**/*'
       },
       postBuild: {
         expand: true,
-        cwd: 'www/',
+        cwd: 'bin/',
         src: [
           'angular/',
           'roboto-fontface/',
@@ -27,8 +27,8 @@ module.exports = function(grunt) {
     copy: {
       source: {
         expand: true,
-        cwd: 'source/',
-        dest: 'www/',
+        cwd: 'lib/',
+        dest: 'bin/',
         src: '**/*'
       },
       angular: {
@@ -36,7 +36,7 @@ module.exports = function(grunt) {
           {
             expand: true,
             cwd: 'bower_components/',
-            dest: 'www/angular/',
+            dest: 'bin/angular/',
             src: [
               'angular/angular.js',
               'angular-route/angular-route.js',
@@ -55,13 +55,13 @@ module.exports = function(grunt) {
           {
             expand: true,
             cwd: 'bower_components/roboto-fontface/fonts/',
-            dest: 'www/fonts/roboto/',
+            dest: 'bin/fonts/roboto/',
             src: ['*.eot', '*.ttf', '*.woff', '*.woff2', '*.svg']
           },
           {
             expand: true,
             cwd: 'bower_components/roboto-fontface/css/',
-            dest: 'www/roboto-fontface/',
+            dest: 'bin/roboto-fontface/',
             src: '*.scss'
           }
         ]
@@ -69,7 +69,7 @@ module.exports = function(grunt) {
       materialIcons: {
         expand: true,
         cwd: 'bower_components/material-design-icons/iconfont/',
-        dest: 'www/fonts/material-icons/',
+        dest: 'bin/fonts/material-icons/',
         src: ['*.eot', '*.ttf', '*.woff', '*.woff2', '*.svg']
       }
     },
@@ -80,22 +80,22 @@ module.exports = function(grunt) {
       },
       vendor: {
         files: {
-          'www/angular.min.js': [
-            'www/angular/angular.js',
-            'www/angular/angular-route.js',
-            'www/angular/angular-resource.js',
-            'www/angular/angular-animate.js',
-            'www/angular/angular-aria.js',
-            'www/angular/angular-material.js'
+          'bin/angular.min.js': [
+            'bin/angular/angular.js',
+            'bin/angular/angular-route.js',
+            'bin/angular/angular-resource.js',
+            'bin/angular/angular-animate.js',
+            'bin/angular/angular-aria.js',
+            'bin/angular/angular-material.js'
           ]
         }
       },
       source: {
         files: {
-          'www/index.min.js': [
-            'www/ua-core/ua-core.js',
-            'www/ua-*/**/*.js',
-            'www/index.js'
+          'bin/index.min.js': [
+            'bin/ua-core/ua-core.js',
+            'bin/ua-*/**/*.js',
+            'bin/index.js'
           ]
         }
       },
@@ -119,7 +119,7 @@ module.exports = function(grunt) {
       },
       source: {
         files: {
-          'www/index.min.css': 'www/index.scss'
+          'bin/index.min.css': 'bin/index.scss'
         }
       },
       release: {
@@ -135,38 +135,38 @@ module.exports = function(grunt) {
     connect: {
       build: {
         options: {
-					port: 8000,
-					base: {
-						path: 'www/',
-						options: {
-							index: 'index.html'
-						}
-					}
-				}
+          port: process.env.PORT || 3000,
+          base: {
+            path: 'bin/',
+            options: {
+              index: 'index.html'
+            }
+          }
+        }
       }
     },
     watch: {
-			scripts: {
-				files: 'source/**/*.js',
-				tasks: [
+      scripts: {
+        files: 'lib/**/*.js',
+        tasks: [
           'copy:source',
           'uglify:source'
         ]
-			},
+      },
       styles: {
-				files: 'source/**/*.scss',
-				tasks: [
+        files: 'lib/**/*.scss',
+        tasks: [
           'copy:source',
           'sass:source'
         ]
-			},
+      },
       templates: {
-        files: 'source/**/*.html',
+        files: 'lib/**/*.html',
         tasks: [
           'copy:source'
         ]
       }
-		}
+    }
   });
 
   grunt.registerTask('build', [
@@ -181,8 +181,8 @@ module.exports = function(grunt) {
     'clean:preBuild', 'copy', 'uglify:release', 'sass:release', 'clean:postBuild'
   ]);
 
-  grunt.registerTask('dev', [
-    'debug', 'connect', 'watch'
+  grunt.registerTask('start', [
+    'connect', 'watch'
   ]);
 
   grunt.registerTask('default', [
